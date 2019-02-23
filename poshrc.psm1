@@ -1,19 +1,3 @@
-Import-Module Get-ChildItemColor
-
-function goHome {
-    Set-Location  "${HOME}/Desktop"
-}
-
-Set-Alias dk goHome
-Set-Alias l Get-ChildItemColor -option AllScope
-Set-Alias ls Get-ChildItemColorFormatWide -option AllScope
-
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-}
-
 function git__getCurrBranch {
     return [string]($(git symbolic-ref HEAD) -replace ".+\/.+\/", "")
 }
@@ -73,42 +57,4 @@ function isAdmin {
     $prp = new-object System.Security.Principal.WindowsPrincipal($wid)
     $adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
     return [bool]$prp.IsInRole($adm)
-}
-
-function prompt {
-    $exitCodeStatus = $?
-
-    if (isAdmin) {
-        Write-Host "⚡ " -ForegroundColor Yellow -NoNewline
-    }
-
-    if ($exitCodeStatus) {
-
-    }
-    else {
-        Write-Host "╳ " -ForegroundColor Red -NoNewline
-    }
-
-    Write-Host ($(pathLikeFish)) -ForegroundColor Blue -NoNewline
-    
-    if (git__isRepo) {
-        $currBranch = $(git__getCurrBranch)
-        if ($currBranch.Length -gt 0)  {
-            if (("" + $(git status -s)).Length -gt 0) {
-                Write-Host -ForegroundColor Yellow (" (${currBranch})")
-            }
-            else {
-                Write-Host -ForegroundColor Green (" (${currBranch})")
-            }
-        } else {
-            Write-Host -ForegroundColor White ""
-        }
-    }
-    else {
-        Write-Host -ForegroundColor White ""
-    }
-    
-    Write-Host -ForegroundColor White ("$") -NoNewline
-
-    return " "
 }
