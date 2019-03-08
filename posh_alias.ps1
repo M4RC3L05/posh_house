@@ -54,7 +54,7 @@ function gb {
 }
 
 function gbd {
-    git branch --delete
+    git branch --delete $args
 }
 
 function gc {
