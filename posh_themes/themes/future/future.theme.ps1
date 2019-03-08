@@ -1,8 +1,8 @@
-function Theme {
+function prompt {
     $exitCodeStatus = $?
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
     $errorSign = [char]::ConvertFromUtf32(0x00002716)
-    $repoDirtySign = [char]::ConvertFromUtf32(0x00002260)
+    $repoDirtySign = [char]::ConvertFromUtf32(0x000000b1);
     $prompt = ""
 
     if (isAdmin) {
@@ -21,10 +21,10 @@ function Theme {
 
         if ($currBranch.Length -gt 0) {
             if (("" + $(git status -s)).Length -gt 0) {
-                $prompt += Write-Prompt " (${currBranch} ${repoDirtySign})" -ForegroundColor ([ConsoleColor]::Yellow)
+                $prompt += Write-Prompt " ($currBranch $repoDirtySign)" -ForegroundColor ([ConsoleColor]::Yellow)
             }
             else {
-                $prompt += Write-Prompt " (${currBranch})" -ForegroundColor ([ConsoleColor]::Green)
+                $prompt += Write-Prompt " ($currBranch)" -ForegroundColor ([ConsoleColor]::Green)
             }
         }
         else {
@@ -34,5 +34,5 @@ function Theme {
 
     $prompt += Write-Prompt "`n$" -ForegroundColor ([ConsoleColor]::White)
 
-    return $prompt
+    "$prompt "
 }

@@ -16,4 +16,4 @@ if ($agent -eq 0) {
     Start-SshAgent
 }
 
-. "$PSScriptRoot\posh_themes\themes\andros\andros.theme.ps1"
+. "$PSScriptRoot\posh_themes\themes\future\future.theme.ps1"

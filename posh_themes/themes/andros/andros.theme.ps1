@@ -42,6 +42,5 @@ function prompt {
     $prompt += Write-Prompt -Object "$arrowSign" -ForegroundColor ([ConsoleColor]::Yellow)
     $prompt += Write-Prompt -Object "$arrowSign" -ForegroundColor ([ConsoleColor]::Magenta)
 
-    $prompt += " "
-    $prompt
+    "$prompt "
 }
