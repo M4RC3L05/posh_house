@@ -7,7 +7,6 @@ Import-Module PSReadLine
 . "$PSScriptRoot\posh_functions\path\pathHelpers.ps1"
 . "$PSScriptRoot\posh_functions\os\osHelpers.ps1"
 . "$PSScriptRoot\posh_functions\ssh\sshHelpers.ps1"
-. "$PSScriptRoot\posh_themes\themes\future\future.theme.ps1"
 
 $GitPromptSettings.EnableFileStatus = $false
 
@@ -17,7 +16,4 @@ if ($agent -eq 0) {
     Start-SshAgent
 }
 
-function prompt {
-    $prompt = & FutureTheme
-    if ($prompt) { "$prompt " } else { " " }
-}
+. "$PSScriptRoot\posh_themes\themes\andros\andros.theme.ps1"
