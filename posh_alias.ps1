@@ -1,10 +1,12 @@
 
 Remove-Item alias:* -Force
 
+Set-Alias % ForEach-Object -Option AllScope
+Set-Alias ? Where-Object -Option AllScope
 Set-Alias cd Set-Location -Option AllScope
 
 function dk {
-    Set-Location  "${HOME}/Desktop"
+    Set-Location "${HOME}/Desktop"
 }
 
 function man {
