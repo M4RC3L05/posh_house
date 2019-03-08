@@ -1,38 +1,39 @@
 
-function Theme {
+function FutureTheme {
     $exitCodeStatus = $?
-    $adminSign = [char]::ConvertFromUtf32(0x26a1)
-    $errorSign = [char]::ConvertFromUtf32(0x2716)
+    $adminSign = [char]::ConvertFromUtf32(0x000026a1)
+    $errorSign = [char]::ConvertFromUtf32(0x00002716)
+    $repoDirtySign = [char]::ConvertFromUtf32(0x00002260)
+    $prompt = ""
 
     if (isAdmin) {
-        Write-Host ("$adminSign ") -ForegroundColor Yellow -NoNewline
+        $prompt += Write-Prompt ("$adminSign ") -ForegroundColor ([ConsoleColor]::Yellow)
     }
 
     if (!$exitCodeStatus) {
-        Write-Host ("$errorSign ") -ForegroundColor Red -NoNewline
+        $prompt += Write-Prompt ("$errorSign ") -ForegroundColor ([ConsoleColor]::Red)
     }
 
-    Write-Host ($(pathLikeFish)) -ForegroundColor Blue -NoNewline
+    $prompt += Write-Prompt ($(pathLikeFish)) -ForegroundColor ([ConsoleColor]::Blue)
 
     if (git__isRepo) {
-        $currBranch = $(git__getCurrBranch)
+        [string]$gitDir = $(Get-GitDirectory)
+        [string]$currBranch = $(Get-GitBranch -gitDir $gitDir)
+
         if ($currBranch.Length -gt 0) {
             if (("" + $(git status -s)).Length -gt 0) {
-                Write-Host -ForegroundColor Yellow (" (${currBranch})")
+                $prompt += Write-Prompt " (${currBranch} ${repoDirtySign})" -ForegroundColor ([ConsoleColor]::Yellow)
             }
             else {
-                Write-Host -ForegroundColor Green (" (${currBranch})")
+                $prompt += Write-Prompt " (${currBranch})" -ForegroundColor ([ConsoleColor]::Green)
             }
         }
         else {
-            Write-Host -ForegroundColor White ""
+            $prompt += Write-Prompt "" -ForegroundColor ([ConsoleColor]::White)
         }
     }
-    else {
-        Write-Host -ForegroundColor White ""
-    }
 
-    Write-Host -ForegroundColor White ("$") -NoNewline
+    $prompt += Write-Prompt "`n$" -ForegroundColor ([ConsoleColor]::White)
 
-    return " "
+    return $prompt
 }
