@@ -1,14 +1,15 @@
-Import-Module Get-ChildItemColor
-
 function goHome {
     Set-Location  "${HOME}/Desktop"
 }
 
-function ManTLDR {
-    tldr -t ocean $args
+function callMan {
+    & "C:\Users\joaob\scoop\apps\nodejs-lts\current\bin\tldr.cmd" -t ocean $args
 }
 
-Set-Alias dk goHome
-Set-Alias l Get-ChildItemColor -option AllScope
-Set-Alias ls Get-ChildItemColorFormatWide -option AllScope
-Set-Alias man ManTLDR -option AllScope
+Remove-Item alias:* -Force
+
+Set-Alias cd Set-Location -Option AllScope
+Set-Alias cls Clear-Host -Option AllScope
+Set-Alias dk goHome -Option AllScope
+Set-Alias man callMan -Option AllScope
+Set-Alias ls "C:\Users\joaob\scoop\shims\ls.exe" -Option AllScope
