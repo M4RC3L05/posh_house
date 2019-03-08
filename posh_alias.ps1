@@ -1,6 +1,7 @@
 
 Remove-Item alias:* -Force
 
+Set-Alias cls Clear-Host -Option AllScope
 Set-Alias % ForEach-Object -Option AllScope
 Set-Alias ? Where-Object -Option AllScope
 Set-Alias cd Set-Location -Option AllScope
