@@ -9,6 +9,8 @@ Import-Module "$PSScriptRoot\posh_themes\ThemeProvider.psm1"
 
 $GitPromptSettings.EnableFileStatus = $false
 
+Set-PSReadlineOption -BellStyle None
+
 # SSH-AGENT AUTOSTART
 $agent = Get-SshAgent
 if ($agent -eq 0) {
