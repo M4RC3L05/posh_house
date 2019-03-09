@@ -1,4 +1,3 @@
-
 Remove-Item alias:* -Force
 
 Set-Alias cls Clear-Host -Option AllScope
