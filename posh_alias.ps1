@@ -24,6 +24,7 @@ function fsize {
     C:\Users\joaob\scoop\shims\du.exe -hcs $args
 }
 
+
 # ----------------------
 # Git Aliases
 # ----------------------
