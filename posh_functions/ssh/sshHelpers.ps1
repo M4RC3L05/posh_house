@@ -42,7 +42,7 @@ function Get-SshAgent() {
 # Start the SSH agent.
 function Start-SshAgent() {
     # Start the agent and gather its feedback info
-    [string]$output = ssh-agent
+    [string]$output = $(ssh-agent -s)
 
     $lines = $output.Split(";")
     $agentPid = 0
