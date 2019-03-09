@@ -1,5 +1,11 @@
 function Theme {
-    $exitCodeStatus = $?
+
+    param(
+        [Parameter(Mandatory = $true)]
+        [bool]
+        $exitStatus
+    )
+
     $successCmd = [char]::ConvertFromUtf32(0x00002714)
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
     $errorCmd = [char]::ConvertFromUtf32(0x00002716)
@@ -9,19 +15,19 @@ function Theme {
     $prompt = ""
 
     if (isAdmin) {
-        $prompt += Write-Prompt ("$adminSign ") -ForegroundColor ([ConsoleColor]::Yellow)
+        $prompt += Write-Host "$adminSign " -ForegroundColor ([ConsoleColor]::Yellow)
     }
 
-    if (!$exitCodeStatus) {
-        $prompt += Write-Prompt ("$errorCmd ") -ForegroundColor ([ConsoleColor]::Red)
+    if (!$exitStatus) {
+        $prompt += Write-Prompt "$errorCmd " -ForegroundColor ([ConsoleColor]::Red)
     }
     else {
-        $prompt += Write-Prompt ("$successCmd ") -ForegroundColor ([ConsoleColor]::Green)
+        $prompt += Write-Prompt "$successCmd " -ForegroundColor ([ConsoleColor]::Green)
     }
 
     $prompt += Write-Prompt (& pathLikeFish) -ForegroundColor ([ConsoleColor]::Blue)
 
-    if (git__isRepo) {
+    if (Get-GitStatus) {
         [string]$gitDir = $(Get-GitDirectory)
         [string]$currBranch = $(Get-GitBranch -gitDir $gitDir)
 
@@ -41,9 +47,9 @@ function Theme {
         }
     }
 
-    $prompt += Write-Prompt -Object " $arrowSign" -ForegroundColor ([ConsoleColor]::Red)
-    $prompt += Write-Prompt -Object "$arrowSign" -ForegroundColor ([ConsoleColor]::Yellow)
-    $prompt += Write-Prompt -Object "$arrowSign" -ForegroundColor ([ConsoleColor]::Magenta)
-
-    "$prompt "
+    $prompt += Write-Prompt " $arrowSign" -ForegroundColor ([ConsoleColor]::Red)
+    $prompt += Write-Prompt "$arrowSign" -ForegroundColor ([ConsoleColor]::Yellow)
+    $prompt += Write-Prompt "$arrowSign" -ForegroundColor ([ConsoleColor]::Magenta)
+    $prompt += " "
+    $prompt
 }

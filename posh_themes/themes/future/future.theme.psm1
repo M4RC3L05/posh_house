@@ -1,5 +1,11 @@
 function Theme {
-    $exitCodeStatus = $?
+
+    param(
+        [Parameter(Mandatory = $true)]
+        [bool]
+        $exitStatus
+    )
+
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
     $errorSign = [char]::ConvertFromUtf32(0x00002716)
     $repoDirtySign = [char]::ConvertFromUtf32(0x000000b1);
@@ -9,13 +15,13 @@ function Theme {
         $prompt += Write-Prompt ("$adminSign ") -ForegroundColor ([ConsoleColor]::Yellow)
     }
 
-    if (!$exitCodeStatus) {
+    if (!$exitStatus) {
         $prompt += Write-Prompt ("$errorSign ") -ForegroundColor ([ConsoleColor]::Red)
     }
 
     $prompt += Write-Prompt ($(pathLikeFish)) -ForegroundColor ([ConsoleColor]::Blue)
 
-    if (git__isRepo) {
+    if (Get-GitStatus) {
         [string]$gitDir = $(Get-GitDirectory)
         [string]$currBranch = $(Get-GitBranch -gitDir $gitDir)
 
@@ -33,6 +39,6 @@ function Theme {
     }
 
     $prompt += Write-Prompt "`n$" -ForegroundColor ([ConsoleColor]::White)
-
-    "$prompt "
+    $prompt += " "
+    $prompt
 }
