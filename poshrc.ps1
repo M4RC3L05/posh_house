@@ -11,9 +11,9 @@ Import-Module "$PSScriptRoot\posh_themes\ThemeProvider.psm1"
 $GitPromptSettings.EnableFileStatus = $false
 
 # SSH-AGENT AUTOSTART
-$agent = Get-SshAgent
+$agent = SshAgent-Get
 if ($agent -eq 0) {
-    Start-SshAgent
+    SshAgent-Start
 }
 
 Set-Theme -themeName "future"

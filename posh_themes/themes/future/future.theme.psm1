@@ -21,7 +21,7 @@ function Theme {
 
     $prompt += Write-Prompt ($(pathLikeFish)) -ForegroundColor ([ConsoleColor]::Blue)
 
-    if (Get-GitStatus) {
+    if (git__isRepo) {
         [string]$gitDir = $(Get-GitDirectory)
         [string]$currBranch = $(Get-GitBranch -gitDir $gitDir)
 

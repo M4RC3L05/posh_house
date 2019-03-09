@@ -11,7 +11,7 @@
 
 # Retrieve the current SSH agent PId (or zero). Can be used to determine if there
 # is an agent already starting.
-function Get-SshAgent() {
+function SshAgent-Get() {
     $agentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "User")
     if ([int]$agentPid -eq 0) {
         $agentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
@@ -40,9 +40,9 @@ function Get-SshAgent() {
 }
 
 # Start the SSH agent.
-function Start-SshAgent() {
+function SshAgent-Start() {
     # Start the agent and gather its feedback info
-    [string]$output = $(ssh-agent -s)
+    [string]$output = ssh-agent
 
     $lines = $output.Split(";")
     $agentPid = 0
@@ -64,8 +64,8 @@ function Start-SshAgent() {
 }
 
 # Stop a running SSH agent
-function Stop-SshAgent() {
-    [int]$agentPid = Get-SshAgent
+function SshAgent-Stop() {
+    [int]$agentPid = SshAgent-Get
     if ([int]$agentPid -gt 0) {
         # Stop agent process
         $proc = Get-Process -Id $agentPid
