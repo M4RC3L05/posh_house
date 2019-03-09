@@ -1,4 +1,4 @@
-function prompt {
+function Theme {
     $exitCodeStatus = $?
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
     $errorSign = [char]::ConvertFromUtf32(0x00002716)

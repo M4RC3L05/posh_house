@@ -1,4 +1,4 @@
-function prompt {
+function Theme {
     $exitCodeStatus = $?
     $successCmd = [char]::ConvertFromUtf32(0x00002714)
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
@@ -26,11 +26,14 @@ function prompt {
         [string]$currBranch = $(Get-GitBranch -gitDir $gitDir)
 
         if ($currBranch.Length -gt 0) {
+
+            $prompt += Write-Prompt " git:$gitSign" -ForegroundColor ([ConsoleColor]::White)
+
             if (("" + $(git status -s)).Length -gt 0) {
-                $prompt += Write-Prompt " git:$gitSign $currBranch$repoDirtySign" -ForegroundColor ([ConsoleColor]::Yellow)
+                $prompt += Write-Prompt " $currBranch$repoDirtySign" -ForegroundColor ([ConsoleColor]::Yellow)
             }
             else {
-                $prompt += Write-Prompt " git:$gitSign $currBranch" -ForegroundColor ([ConsoleColor]::Green)
+                $prompt += Write-Prompt " $currBranch" -ForegroundColor ([ConsoleColor]::Green)
             }
         }
         else {
