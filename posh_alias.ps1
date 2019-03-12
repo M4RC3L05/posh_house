@@ -25,6 +25,9 @@ function fsize {
     C:\Users\joaob\scoop\shims\du.exe -hcs $args
 }
 
+function trash {
+    Remove-ItemSafely $args
+}
 
 # ----------------------
 # Git Aliases

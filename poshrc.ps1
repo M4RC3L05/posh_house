@@ -5,6 +5,7 @@
 
 Import-Module posh-git
 Import-Module PSReadLine
+Import-Module Recycle
 Import-Module "$PSScriptRoot\posh_themes\ThemeProvider.psm1"
 
 $GitPromptSettings.EnableFileStatus = $false
