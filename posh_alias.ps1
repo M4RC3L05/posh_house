@@ -2,27 +2,29 @@ Remove-Item alias:* -Force
 
 Set-Alias cls Clear-Host -Option AllScope
 Set-Alias cd Set-Location -Option AllScope
+Set-Alias chdir Set-Location -Option AllScope
 Set-Alias % ForEach-Object -Option AllScope
 Set-Alias ? Where-Object -Option AllScope
+Set-Alias iex Invoke-Expression -Option AllScope
 
 function dk {
     Set-Location "${HOME}/Desktop"
 }
 
 function man {
-    tldr -t ocean $args
+    tldr.cmd -t ocean $args
 }
 
 function ls {
-    C:\Users\joaob\scoop\shims\ls.exe --color=always $args
+    ls.exe --color=always $args
 }
 
 function mkdir {
-    C:\Users\joaob\scoop\shims\mkdir.exe $args
+    mkdir.exe $args
 }
 
 function fsize {
-    C:\Users\joaob\scoop\shims\du.exe -hcs $args
+    du.exe -hcs $args
 }
 
 function trash {
@@ -33,7 +35,7 @@ function trash {
 # Git Aliases
 # ----------------------
 function g {
-    git $args
+    git.ps1 $args
 }
 
 function ga {
@@ -41,93 +43,93 @@ function ga {
 }
 
 function gaa {
-    git add .
+    git.ps1 add .
 }
 
 function gaaa {
-    git add --all $args
+    git.ps1 add --all $args
 }
 
 function gau {
-    git add --update $args
+    git.ps1 add --update $args
 }
 
 function gb {
-    git branch $args
+    git.ps1 branch $args
 }
 
 function gbd {
-    git branch --delete $args
+    git.ps1 branch --delete $args
 }
 
 function gc {
-    git commit $args
+    git.ps1 commit $args
 }
 
 function gco {
-    git checkout $args
+    git.ps1 checkout $args
 }
 
 function gd {
-    git diff $args
+    git.ps1 diff $args
 }
 
 function ginit {
-    git init $args
+    git.ps1 init $args
 }
 
 function glg {
-    git log --graph --oneline --decorate --all $args
+    git.ps1 log --graph --oneline --decorate --all $args
 }
 
 function gm {
-    git merge $args
+    git.ps1 merge $args
 }
 
 function gp {
-    git pull $args
+    git.ps1 pull $args
 }
 
 function gpr {
-    git pull --rebase $args
+    git.ps1 pull --rebase $args
 }
 
 function gr {
-    git rebase $args
+    git.ps1 rebase $args
 }
 
 function gs {
-    git status $args
+    git.ps1 status $args
 }
 
 function gss {
-    git status --short $args
+    git.ps1 status --short $args
 }
 
 function gst {
-    git stash $args
+    git.ps1 stash $args
 }
 
 function gsta {
-    git stash apply $args
+    git.ps1 stash apply $args
 }
 
 function gstd {
-    git stash drop $args
+    git.ps1 stash drop $args
 }
 
 function gstl {
-    git stash list $args
+    git.ps1 stash list $args
 }
 
 function gstp {
-    git stash pop $args
+    git.ps1 stash pop $args
 }
 
 function gsts {
-    git stash save $args
+    git.ps1 stash save $args
 }
 
 function gpush {
-    git push $args
+    git.ps1 push $args
 }
