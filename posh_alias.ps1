@@ -15,16 +15,47 @@ function man {
     tldr.cmd -t ocean $args
 }
 
-function ls {
-    ls.exe --color=always $args
-}
-
-# function mkdir {
-#     mkdir.exe $args
-# }
-
 function fsize {
-    du.exe -hcs $args
+    param(
+        # Path of directory/file
+        [string]
+        $Path
+    )
+
+    $totalSize = 0
+
+    if (!(Test-Path -Path $Path)) {
+        Write-Output "Not a valid directory or file."
+        return;
+    }
+
+    if ((Get-Item $Path) -is [System.IO.DirectoryInfo]) {
+        $totalSize = (Get-ChildItem -Recurse $Path | Measure-Object -Property Length -Sum).Sum
+    }
+    elseif ((Get-Item $Path) -is [System.IO.FileInfo]) {
+        $totalSize = (Get-Item $Path).Length
+    }
+    else {
+        Write-Output "Not a valid directory or file."
+        return;
+    }
+
+
+    $formated = switch -Regex ([math]::Truncate([math]::log($totalSize, 1024))) {
+        '^0' { "$totalSize Bytes" }
+
+        '^1' { "{0:n2} KB" -f ($totalSize / 1KB) }
+
+        '^2' { "{0:n2} MB" -f ($totalSize / 1MB) }
+
+        '^3' { "{0:n2} GB" -f ($totalSize / 1GB) }
+
+        '^4' { "{0:n2} TB" -f ($totalSize / 1TB) }
+
+        Default { "{0:n2} PB" -f ($totalSize / 1pb) }
+    }
+
+    Write-Output $formated
 }
 
 function trash {
