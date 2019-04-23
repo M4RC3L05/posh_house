@@ -8,7 +8,7 @@ function Theme {
 
     $successCmd = [char]::ConvertFromUtf32(0x00002714)
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
-    $errorCmd = [char]::ConvertFromUtf32(0x00002716)
+    $errorCmd = [char]::ConvertFromUtf32(0x00002573)
     $arrowSign = [char]::ConvertFromUtf32(0x0000276F)
     $gitSign = [char]::ConvertFromUtf32(0x0000f418)
     $repoDirtySign = [char]::ConvertFromUtf32(0x000000b1);

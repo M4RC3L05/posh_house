@@ -7,7 +7,7 @@ function Theme {
     )
 
     $adminSign = [char]::ConvertFromUtf32(0x000026a1)
-    $errorSign = [char]::ConvertFromUtf32(0x00002716)
+    $errorSign = [char]::ConvertFromUtf32(0x00002573)
     $repoDirtySign = [char]::ConvertFromUtf32(0x000000b1);
     $prompt = ""
 
