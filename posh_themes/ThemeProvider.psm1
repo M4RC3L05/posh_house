@@ -53,7 +53,7 @@ function Get-Themes {
             )
 
             return $dir
-        }) | ForEach-Object {$i = 1} {
+        }) | ForEach-Object { $i = 1 } {
         Write-Host "#$i - $_"
 
         $i += 1
