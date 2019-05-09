@@ -61,3 +61,21 @@ function fsize {
 function trash {
     Remove-ItemSafely $args
 }
+
+function touch() {
+    param(
+        # Path of directory/file
+        [string[]]
+        $Files
+    )
+
+    $splited = $Files -split ","
+
+    $splited | ForEach-Object {
+        if ($_.Trim().Length -le 0) {
+            return;
+        }
+
+        New-Item -ItemType File -Name $_.Trim()
+    }
+}
