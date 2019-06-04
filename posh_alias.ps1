@@ -9,7 +9,14 @@
 
 function innerLS {
     Param ([string]$Path)
-    Get-ChildItem -Path $Path | Select-Object Mode, Name, LastWriteTime, @{Name = "Length"; Expression = { Format-FileSize($_.Length) } }
+    Get-ChildItem -Path $Path | Select-Object Mode, Name, LastWriteTime, @{Name = "Length"; Expression = {
+            if ((Get-Item $_.FullName) -is [System.IO.DirectoryInfo]) {
+                return ""
+            }
+
+            Format-FileSize -Size $_.Length
+        }
+    }
 }
 
 Set-Alias ls innerLS -Option AllScope
@@ -47,20 +54,7 @@ function fsize {
         return;
     }
 
-
-    $formated = switch -Regex ([math]::Truncate([math]::log($totalSize, 1024))) {
-        '^0' { "$totalSize Bytes" }
-
-        '^1' { "{0:n2} KB" -f ($totalSize / 1KB) }
-
-        '^2' { "{0:n2} MB" -f ($totalSize / 1MB) }
-
-        '^3' { "{0:n2} GB" -f ($totalSize / 1GB) }
-
-        '^4' { "{0:n2} TB" -f ($totalSize / 1TB) }
-
-        Default { "{0:n2} PB" -f ($totalSize / 1pb) }
-    }
+    $formated = Format-FileSize -Size $totalSize
 
     Write-Output $formated
 }
