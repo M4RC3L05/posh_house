@@ -7,6 +7,13 @@
 # Set-Alias ? Where-Object -Option AllScope
 # Set-Alias iex Invoke-Expression -Option AllScope
 
+function innerLS {
+    Param ([string]$Path)
+    Get-ChildItem -Path $Path | Select-Object Mode, Name, LastWriteTime, @{Name = "Length"; Expression = { Format-FileSize($_.Length) } }
+}
+
+Set-Alias ls innerLS -Option AllScope
+
 function dk {
     Set-Location "${HOME}/Desktop"
 }
