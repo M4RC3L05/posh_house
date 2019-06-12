@@ -13,4 +13,4 @@ $GitPromptSettings.EnableFileStatus = $false
 
 Set-PSReadlineOption -BellStyle None
 
-Set-Theme -themeName "future"
+Set-Theme -themeName "andros"
