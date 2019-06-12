@@ -15,7 +15,7 @@ function Theme {
     $prompt = ""
 
     if (isAdmin) {
-        $prompt += Write-Host "$adminSign " -ForegroundColor ([ConsoleColor]::Yellow)
+        $prompt += Write-Prompt "$adminSign " -ForegroundColor ([ConsoleColor]::Yellow)
     }
 
     if (!$exitStatus) {
