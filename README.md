@@ -9,10 +9,10 @@ Install-Module -name posh-git
 Install-Module -name Recycle
 ```
 
-then go to your poweshel profile file and past has follows
+then go to your powershel profile file and past has follows
 
 ```powershell
-# change to the directory you clone mine is in the home folder
+# change to the directory you clone, mine is in the home folder
 if (Test-Path $home\.posh_house\poshrc.ps1) {
     # import poshrc
     . $home\.posh_house\poshrc.ps1
