@@ -1,25 +1,25 @@
-# Remove-Item alias:* -Force
+Remove-Item alias:* -Force
 
-# Set-Alias cls Clear-Host -Option AllScope
-# Set-Alias cd Set-Location -Option AllScope
+Set-Alias cls Clear-Host -Option AllScope
+Set-Alias cd Set-Location -Option AllScope
 # Set-Alias chdir Set-Location -Option AllScope
-# Set-Alias % ForEach-Object -Option AllScope
-# Set-Alias ? Where-Object -Option AllScope
+Set-Alias % ForEach-Object -Option AllScope
+Set-Alias ? Where-Object -Option AllScope
 # Set-Alias iex Invoke-Expression -Option AllScope
 
-function innerLS {
-    Param ([string]$Path)
-    Get-ChildItem -Path $Path | Select-Object Mode, Name, LastWriteTime, @{Name = "Length"; Expression = {
-            if ((Get-Item $_.FullName) -is [System.IO.DirectoryInfo]) {
-                return ""
-            }
+# function innerLS {
+#     Param ([string]$Path)
+#     Get-ChildItem -Path $Path | Select-Object Mode, Name, LastWriteTime, @{Name = "Length"; Expression = {
+#             if ((Get-Item $_.FullName) -is [System.IO.DirectoryInfo]) {
+#                 return ""
+#             }
 
-            Format-FileSize -Size $_.Length
-        }
-    }
-}
+#             Format-FileSize -Size $_.Length
+#         }
+#     }
+# }
 
-Set-Alias ls innerLS -Option AllScope
+# Set-Alias ls innerLS -Option AllScope
 
 function dk {
     Set-Location "${HOME}/Desktop"
@@ -63,20 +63,20 @@ function trash {
     Remove-ItemSafely $args
 }
 
-function touch() {
-    param(
-        # Path of directory/file
-        [string[]]
-        $Files
-    )
+# function touch() {
+#     param(
+#         # Path of directory/file
+#         [string[]]
+#         $Files
+#     )
 
-    $splited = $Files -split ","
+#     $splited = $Files -split ","
 
-    $splited | ForEach-Object {
-        if ($_.Trim().Length -le 0) {
-            return;
-        }
+#     $splited | ForEach-Object {
+#         if ($_.Trim().Length -le 0) {
+#             return;
+#         }
 
-        New-Item -ItemType File -Name $_.Trim()
-    }
-}
+#         New-Item -ItemType File -Name $_.Trim()
+#     }
+# }
